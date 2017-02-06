@@ -35,7 +35,7 @@
 	<classpathentry kind="lib" path="lib/jcl-over-slf4j-1.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/jgraphx-1.10.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/joda-time-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.11.jar" sourcepath="D:/maven/repository/junit/junit/4.11/junit-4.11-sources.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/mail-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/mybatis-3.2.2.jar"/>
