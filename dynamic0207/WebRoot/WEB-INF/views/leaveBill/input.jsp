@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/js/commons.jspf" %>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,11 +34,11 @@
 		  <tr>
 		    <td>
 		    	<div align="left" class="STYLE21">
-			 		<input type="hidden" name="id"/>
-			 		<input type="hidden" name="user.id"/>
-			 		请假天数:<input type="text" name="days" style="width: 200px;"/><br/>
-			 		请假原因:<input type="text" name="content" style="width: 800px;"/><br/>
-			 		备&emsp;&emsp;注:<textarea name="remark" cols="50" rows="5"></textarea><br/>
+		    		<s:hidden name="id"></s:hidden>
+		    		<s:hidden name="user.id"></s:hidden>
+			 		请假天数:<s:textfield  name="days" cssStyle="width: 200px;"/><br/>
+			 		请假原因:<s:textfield name="content" cssStyle="width: 800px;"/><br/>
+			 		备&emsp;&emsp;注:<s:textarea name="remark" cols="50" rows="5"></s:textarea><br/>
 			 		<input type="submit" value="提交" class="button_ok"/>
 				</div>
 		    </td>

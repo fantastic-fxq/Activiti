@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/js/commons.jspf" %>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,59 +44,52 @@
 		        <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">请假状态</span></div></td>
 		        <td width="25%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
 		      </tr>
-		        <tr>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">18</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">范冰冰</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">3</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">病假</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">发烧</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2014-01-05 16:26:13</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
-			        	<div align="center">
-			 					初始录入
-		            	</div>
-		            </td>
-			        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
-			        	<a href="${pageContext.request.contextPath }/leaveBillAction_input.action?id=1" >修改</a>
-						<a href="leaveBillAction_delete.action?id=1" >删除</a>
-						<a href="${pageContext.request.contextPath }/workflowAction_startProcess.action?id=1" >申请请假</a>
-					</div></td>
-			    </tr> 
-			     <tr>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">19</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">范冰冰</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">4</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">事假</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">旅游</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2014-01-08 10:11:11</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
-			        	<div align="center">
-			 					审批中
-		            	</div>
-		            </td>
-			        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
-			        	
-			        </div></td>
-			    </tr> 
-			    <tr>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">20</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">范冰冰</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">5</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">事假</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">拍戏</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2014-01-12 13:22:11</div></td>
-			        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
-			        	<div align="center">
-			 					审核通过
-		            	</div>
-		            </td>
-			        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
-			        	<a href="${pageContext.request.contextPath }/leaveBillAction_input.action?id=1" >修改</a>
-						<a href="leaveBillAction_delete.action?id=1" >删除</a>
-						<a href="${pageContext.request.contextPath }/workflowAction_viewHisComment.action?id=1" >查看审核记录</a>
-			        </div></td>
-			    </tr> 
 		      
+		     <s:if test="#lbList!=null && #lbList.size()>0">
+		     	<s:iterator value="#lbList">
+		     		        <tr>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><s:property value="id"/> </div></td>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="user.name"/></div></td>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="days"/></div></td>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="content"/></div></td>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="remark"/></div></td>
+			        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:date name="leaveDate" format="yyyy-MM-dd HH:mm:ss"/> </div></td>
+						<td height="20" bgcolor="#FFFFFF" class="STYLE19">
+									<div align="center">
+							<s:if test="state==0">
+			 					初始录入
+			 				</s:if>
+							<s:elseif test="state==1">   
+			 						审核中
+			 				</s:elseif>    
+							<s:else>
+			 						审核完成
+			 				</s:else>
+							</div>
+								</td>
+						<td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
+						
+						<s:if test="state==0">
+			 				<a href="${pageContext.request.contextPath }/leaveBillAction_input.action?id=<s:property value="id"/>" >修改</a>
+							<a href="leaveBillAction_delete.action?id=<s:property value="id"/>" >删除</a>
+							<a href="${pageContext.request.contextPath }/workflowAction_startProcess.action?id=<s:property value="id"/>" >申请请假</a>
+			 			</s:if>
+						<s:elseif test="state==1">  
+			 				<a href="${pageContext.request.contextPath }/workflowAction_viewHisComment?id=<s:property value="id"/>" >查看审核记录</a>
+			 			</s:elseif>
+						<s:else>
+			 				<a href="${pageContext.request.contextPath }/leaveBillAction_input.action?id=<s:property value="id"/>" >修改</a>
+							<a href="leaveBillAction_delete.action?id=<s:property value="id"/>" >删除</a>
+							<a href="${pageContext.request.contextPath }/workflowAction_startProcess.action?id=<s:property value="id"/>" >申请请假</a>
+			 			</s:else>
+			        
+					</div></td>
+			    </tr> 	
+		     	
+		     	</s:iterator>
+		     
+		     </s:if>
+ 
 		    </table></td>
 		  </tr>
 	</table>

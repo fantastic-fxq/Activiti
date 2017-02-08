@@ -42,7 +42,7 @@
             <result name="save" type="redirectAction">
         		<param name="actionName">leaveBillAction_home.action</param>
         	</result>
-        </action>
+        </action> 
     	
     	<action name="workflowAction_*" class="workflowAction" method="{1}">
         	<result name="list" type="redirectAction">
